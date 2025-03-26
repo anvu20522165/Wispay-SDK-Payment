@@ -5,7 +5,6 @@ import org.wispay.payment.sdk.mservice.model.bill.BillParams;
 import java.util.List;
 
 public class PurchaseRequest extends Request {
-
     private BillParams bill;
 
     private String customer;

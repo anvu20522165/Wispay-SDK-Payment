@@ -1,5 +1,6 @@
 package org.wispay.payment.sdk.mservice.model.bill;
 
+import org.wispay.payment.sdk.mservice.common.annotation.NotNull;
 import org.wispay.payment.sdk.mservice.model.Attribute;
 import org.wispay.payment.sdk.mservice.model.bill.extra.BillItem;
 import org.wispay.payment.sdk.mservice.model.bill.extra.Customer;
@@ -10,17 +11,20 @@ import java.util.Map;
 
 public class BillParams {
 
+    @NotNull
     private String requestId;
 
+    @NotNull
     private String billId;
 
     private List<BillItem> items;
 
     private String description;
 
+    @NotNull
     private Double amount;
 
-    private Double partialAmount;
+    private Double paymentAmount;
 
     private String currency = "VND";
 
@@ -32,15 +36,17 @@ public class BillParams {
 
     private Map<String, String> extraData;
 
+    @NotNull
     private Long expiryAt;
-
-    private String template;
 
     private String callbackURL;
 
+    @NotNull
     private String postbackURL;
 
-    private String pspCode;
+    private String[] pspCodes;
+
+    private Boolean isCancelable;
 
 
     public BillParams() {
@@ -63,12 +69,12 @@ public class BillParams {
         this.billId = billId;
     }
 
-    public String getPspCode() {
-        return pspCode;
+    public String[] getPspCodes() {
+        return pspCodes;
     }
 
-    public void setPspCode(String pspCode) {
-        this.pspCode = pspCode;
+    public void setPspCodes(String[] pspCodes) {
+        this.pspCodes = pspCodes;
     }
 
     public String getCallbackURL() {
@@ -135,12 +141,12 @@ public class BillParams {
         this.amount = amount;
     }
 
-    public Double getPartialAmount() {
-        return partialAmount;
+    public Double getPaymentAmount() {
+        return paymentAmount;
     }
 
-    public void setPartialAmount(Double partialAmount) {
-        this.partialAmount = partialAmount;
+    public void setPaymentAmount(Double paymentAmount) {
+        this.paymentAmount = paymentAmount;
     }
 
     public List<Attribute> getAttributes() {
@@ -167,12 +173,11 @@ public class BillParams {
         this.expiryAt = expiryAt;
     }
 
-    public String getTemplate() {
-        return template;
+    public Boolean getCancelable() {
+        return isCancelable;
     }
 
-    public void setTemplate(String template) {
-        this.template = template;
+    public void setCancelable(Boolean cancelable) {
+        isCancelable = cancelable;
     }
-
 }

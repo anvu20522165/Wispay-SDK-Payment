@@ -25,35 +25,6 @@ public class QueryResponse implements Serializable {
     private Double totalRefundAmount;
     private String paymentState;
 
-    public static class Transaction {
-
-        private Long id;
-
-        private String state;
-
-        private Double amount;
-
-        private String currency;
-
-        private String requestId;
-
-        private String pspCode;
-
-        private String pspRefId;
-
-        private String type;
-
-        private Integer resultCode;
-
-        private Long paymentTime;
-
-        private Long createdAt;
-
-        private String phase;
-
-        private Set<Transaction> refundedList = new HashSet<>();
-    }
-
     public List<Transaction> getTransList() {
         return transList;
     }
@@ -112,5 +83,34 @@ public class QueryResponse implements Serializable {
 
     public Double getRemainingAmount() {
         return remainingAmount;
+    }
+
+    public static class Transaction {
+
+        private Long id;
+
+        private String state;
+
+        private Double amount;
+
+        private String currency;
+
+        private String requestId;
+
+        private String pspCode;
+
+        private String pspRefId;
+
+        private String type;
+
+        private Integer resultCode;
+
+        private Long paymentTime;
+
+        private Long createdAt;
+
+        private String phase;
+
+        private Set<Transaction> refundedList = new HashSet<>();
     }
 }

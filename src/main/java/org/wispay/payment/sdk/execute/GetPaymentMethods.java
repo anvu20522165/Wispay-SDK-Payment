@@ -8,12 +8,12 @@ import org.wispay.payment.sdk.mservice.processor.PaymentMethodProcessor;
 
 import java.util.List;
 
-import static org.wispay.payment.sdk.mservice.common.constant.WisPayConstant.LOCAL;
+import static org.wispay.payment.sdk.mservice.common.constant.WisPayConstant.DEV;
 
 public class GetPaymentMethods {
 
     public static void main(String[] args) {
-        Environment environment = Environment.selectEnv(LOCAL);
+        Environment environment = Environment.selectEnv(DEV);
         Request request = new Request();
         request.setRecvWindow(100000L);
         request.setTimestamp(System.currentTimeMillis());

@@ -26,10 +26,10 @@ public class Environment {
 
     public static Environment selectEnv(String target) throws IllegalArgumentException {
         switch (target) {
-            case "local":
-                return selectEnv(EnvTarget.LOCAL);
             case "dev":
                 return selectEnv(EnvTarget.DEV);
+            case "sandbox":
+                return selectEnv(EnvTarget.SANDBOX);
             case "prod":
                 return selectEnv(EnvTarget.PROD);
             default:
@@ -50,17 +50,15 @@ public class Environment {
             prop.load(input);
 
             switch (target) {
-                case LOCAL:
-                    WisPayEndpoint localEndpoint = new WisPayEndpoint(prop.getProperty("LOCAL_WISPAY_PAYMENT_ENDPOINT"));
-                    PartnerInfo localInfo = new PartnerInfo(prop.getProperty("LOCAL_API_KEY"), prop.getProperty("LOCAL_SECRET_KEY"));
-                    Environment local = new Environment(localInfo, localEndpoint, target);
-                    return local;
                 case DEV:
                     WisPayEndpoint devEndpoint = new WisPayEndpoint(prop.getProperty("DEV_WISPAY_PAYMENT_ENDPOINT"));
                     PartnerInfo devInfo = new PartnerInfo(prop.getProperty("DEV_API_KEY"), prop.getProperty("DEV_SECRET_KEY"));
-                    Environment dev = new Environment(devInfo, devEndpoint, target);
-                    return dev;
+                    return new Environment(devInfo, devEndpoint, target);
 
+                case SANDBOX:
+                    WisPayEndpoint localEndpoint = new WisPayEndpoint(prop.getProperty("SANDBOX_WISPAY_PAYMENT_ENDPOINT"));
+                    PartnerInfo localInfo = new PartnerInfo(prop.getProperty("SANDBOX_API_KEY"), prop.getProperty("SANDBOX_SECRET_KEY"));
+                    return new Environment(localInfo, localEndpoint, target);
                 default:
                     throw new IllegalArgumentException("Wispay has not implemented other environment, except: dev and prod");
             }
@@ -96,7 +94,7 @@ public class Environment {
     }
 
     public enum EnvTarget {
-        LOCAL("local"), DEV("development"), PROD("production");
+        DEV("development"), SANDBOX("sandbox"), PROD("production");
 
         private String target;
 
