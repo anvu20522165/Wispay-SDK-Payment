@@ -39,7 +39,7 @@ public class RefundBill {
 
 
         List<String> itemList = new ArrayList<>();
-        itemList.add(item1); //Optional
+        itemList.add(item1);
 
         RefundRequest request = new RefundRequest();
         request.setRefund(params);

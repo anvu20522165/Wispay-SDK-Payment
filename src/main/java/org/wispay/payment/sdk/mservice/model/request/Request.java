@@ -4,12 +4,19 @@ import org.wispay.payment.sdk.mservice.common.enums.Language;
 
 public class Request {
     private String requestId;
+
     private String billId;
+
     private String transId;
+
     private String sessionId;
+
     private Language lang = Language.VI;
+
     private Long startTime;
+
     private Long recvWindow;
+
     private Long timestamp;
 
     public Long getTimestamp() {

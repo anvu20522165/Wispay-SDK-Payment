@@ -10,11 +10,11 @@
 
     <name>WisPay SDK Integration</name>
     <description>WisPay Payment SDK</description>
-    <url>http://www.example.com</url>
+    <url>https://www.example.com</url>
 
     <properties>
-        <maven.compiler.source>1.7</maven.compiler.source>
-        <maven.compiler.target>1.7</maven.compiler.target>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
 
     <!-- Dependencies -->
@@ -42,7 +42,6 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- Mockito (compatible with Java 7 and older Maven versions) -->
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
@@ -62,17 +61,11 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>2.3.2</version> <!-- Ensured the plugin version stays as per your requirement -->
+                <version>3.8.1</version>
                 <configuration>
-                    <source>1.7</source>
-                    <target>1.7</target>
+                    <source>1.8</source>
+                    <target>1.8</target>
                 </configuration>
-            </plugin>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-clean-plugin</artifactId>
-                <version>2.5</version>
             </plugin>
         </plugins>
     </build>

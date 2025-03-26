@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import static org.wispay.payment.sdk.mservice.common.constant.WisPayConstant.LOCAL;
+import static org.wispay.payment.sdk.mservice.common.constant.WisPayConstant.DEV;
 
 public class CreateBill {
     public static void main(String[] args) {
@@ -58,12 +58,12 @@ public class CreateBill {
         itemList.add(item2);
         PurchaseRequest purchaseRequest = new PurchaseRequest();
         purchaseRequest.setRequestId(requestId);
-        purchaseRequest.setShipping(shipping);
+        //purchaseRequest.setShipping(shipping);
+        //purchaseRequest.setCustomer(customer);
+        //purchaseRequest.setItems(itemList);
         purchaseRequest.setTimestamp(System.currentTimeMillis());
         purchaseRequest.setRecvWindow(100000L);
-        purchaseRequest.setBillId(String.valueOf(System.currentTimeMillis()));
-        purchaseRequest.setItems(itemList);
-        purchaseRequest.setCustomer(customer);
+        purchaseRequest.setBillId("WP" + System.currentTimeMillis());
         purchaseRequest.setCallbackURL("https://google.com");
         purchaseRequest.setPostbackURL("https://google.com");
         purchaseRequest.setLang(Language.EN);
@@ -71,20 +71,23 @@ public class CreateBill {
 
         BillParams billParams = new BillParams();
 
-        //set if you want a direct payment with a specific psp
-        billParams.setPspCode("zalopay"); //Optional
+        //Optional for direct payment
+        String[] pspCodes = {"acb", "zalopay"};
+        billParams.setPspCodes(pspCodes);
 
         billParams.setDescription("Creating Bill - Test");
         billParams.setAmount(amount);
+        billParams.setPaymentAmount(5000.0);
         billParams.setCurrency("VND");
         billParams.setExpiryAt(System.currentTimeMillis() + 900000); // + 15 min
-        billParams.setExtraData(new HashMap<String, String>());
+        billParams.setExtraData(new HashMap<>());
+        billParams.setCancelable(false);
 
         //Bill
         purchaseRequest.setBill(billParams);
 
         //Set env
-        Environment environment = Environment.selectEnv(LOCAL);
+        Environment environment = Environment.selectEnv(DEV);
         WisPayResponse<PurchaseResponse> purchaseResponse = BillingProcessor.process(environment, purchaseRequest);
 
     }

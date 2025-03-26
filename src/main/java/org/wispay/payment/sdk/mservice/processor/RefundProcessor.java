@@ -11,11 +11,13 @@ import org.wispay.payment.sdk.mservice.model.request.RefundRequest;
 import org.wispay.payment.sdk.mservice.model.response.HttpResponse;
 import org.wispay.payment.sdk.mservice.model.response.RefundResponse;
 import org.wispay.payment.sdk.mservice.model.response.wispay.WisPayResponse;
+
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import static org.wispay.payment.sdk.mservice.common.constant.HttpConstant.*;
 import static org.wispay.payment.sdk.mservice.common.enums.ResultCode.INVALID_DATA;
 
@@ -47,12 +49,15 @@ public class RefundProcessor extends AbstractProcess<RefundRequest, WisPayRespon
 
     private HttpRequest createRefundRequest(RefundRequest request) {
         try {
-            List<BillItem> items = new ArrayList<>();
-            for (String item : request.getItems()) {
-                BillItem convertedItem = getGson().fromJson(item, BillItem.class);
-                items.add(convertedItem);
+            if (request.getItems().isEmpty() && request.getItems() != null) {
+                List<BillItem> items = new ArrayList<>();
+                for (String item : request.getItems()) {
+                    BillItem convertedItem = getGson().fromJson(item, BillItem.class);
+                    items.add(convertedItem);
+                }
+                request.getRefund().setItems(items);
             }
-            request.getRefund().setItems(items);
+
             String payload = getGson().toJson(request.getRefund());
             String apiKey = partnerInfo.getApiKey();
             long recvWindow = request.getRefund().getRecvWindow();

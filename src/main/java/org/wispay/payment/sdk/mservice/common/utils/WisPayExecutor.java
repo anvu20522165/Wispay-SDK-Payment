@@ -16,7 +16,7 @@ import static org.wispay.payment.sdk.mservice.common.constant.HttpConstant.*;
 
 public class WisPayExecutor {
 
-    private CloseableHttpClient client = HttpClients.createDefault();
+    private final CloseableHttpClient client = HttpClients.createDefault();
 
     private static void setEntity(HttpEntityEnclosingRequestBase request, String payload) {
         if (payload != null) {

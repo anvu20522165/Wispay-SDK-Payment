@@ -56,12 +56,15 @@ public class BillingProcessor extends AbstractProcess<PurchaseRequest, WisPayRes
             request.getBill().setShipping(getGson().fromJson(request.getShipping(), Shipping.class));
             request.getBill().setRequestId(request.getRequestId());
             request.getBill().setBillId(request.getBillId());
-            List<BillItem> items = new ArrayList<>();
-            for (String item : request.getItems()) {
-                BillItem convertedItem = getGson().fromJson(item, BillItem.class);
-                items.add(convertedItem);
+
+            if (request.getItems() != null && !request.getItems().isEmpty()) {
+                List<BillItem> items = new ArrayList<>();
+                for (String item : request.getItems()) {
+                    BillItem convertedItem = getGson().fromJson(item, BillItem.class);
+                    items.add(convertedItem);
+                }
+                request.getBill().setItems(items);
             }
-            request.getBill().setItems(items);
             request.getBill().setCallbackURL(request.getCallbackURL());
             request.getBill().setPostbackURL(request.getPostbackURL());
 
