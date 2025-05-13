@@ -3,6 +3,8 @@ package org.wispay.payment.sdk.mservice.model.response;
 import java.util.Map;
 
 public class PurchaseResponse {
+    //Bill's id
+    private Long id;
     private String requestId;
     private String sessionId;
     // Merchant billId
@@ -11,9 +13,15 @@ public class PurchaseResponse {
     private String currency;
     private Long transId;
     private String payURL;
+    private String shortenPayUrl;
     private Long expiryAt;
     private Map<String, String> extraData;
     private Map<String, String> payOptions;
+
+    private String qrCode;
+    private Long initialPayUrlId;
+    private Long curPayUrlId;
+    private Long[] subPayUrlIds;
 
     public PurchaseResponse() {
         super();
@@ -109,4 +117,51 @@ public class PurchaseResponse {
         this.payOptions = payOptions;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getShortenPayUrl() {
+        return shortenPayUrl;
+    }
+
+    public void setShortenPayUrl(String shortenPayUrl) {
+        this.shortenPayUrl = shortenPayUrl;
+    }
+
+    public String getQrCode() {
+        return qrCode;
+    }
+
+    public void setQrCode(String qrCode) {
+        this.qrCode = qrCode;
+    }
+
+    public Long getInitialPayUrlId() {
+        return initialPayUrlId;
+    }
+
+    public void setInitialPayUrlId(Long initialPayUrlId) {
+        this.initialPayUrlId = initialPayUrlId;
+    }
+
+    public Long getCurPayUrlId() {
+        return curPayUrlId;
+    }
+
+    public void setCurPayUrlId(Long curPayUrlId) {
+        this.curPayUrlId = curPayUrlId;
+    }
+
+    public Long[] getSubPayUrlIds() {
+        return subPayUrlIds;
+    }
+
+    public void setSubPayUrlIds(Long[] subPayUrlIds) {
+        this.subPayUrlIds = subPayUrlIds;
+    }
 }

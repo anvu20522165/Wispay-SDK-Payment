@@ -43,7 +43,7 @@ public class RefundBill {
 
         RefundRequest request = new RefundRequest();
         request.setRefund(params);
-        request.setItems(itemList);
+//        request.setItems(itemList);
 
         Environment environment = Environment.selectEnv(LOCAL);
         WisPayResponse<RefundResponse> wisPayResponse = RefundProcessor.process(environment, request);

@@ -9,7 +9,7 @@ public class PurchaseRequest extends Request {
 
     private String customer;
 
-    private String Shipping;
+    private String shipping;
 
     private List<String> items;
 
@@ -24,7 +24,7 @@ public class PurchaseRequest extends Request {
     public PurchaseRequest(BillParams bill, String customer, String shipping, List<String> items, String callbackURL, String postbackURL) {
         this.bill = bill;
         this.customer = customer;
-        Shipping = shipping;
+        this.shipping = shipping;
         this.items = items;
         this.callbackURL = callbackURL;
         this.postbackURL = postbackURL;
@@ -39,11 +39,11 @@ public class PurchaseRequest extends Request {
     }
 
     public String getShipping() {
-        return Shipping;
+        return this.shipping;
     }
 
     public void setShipping(String shipping) {
-        Shipping = shipping;
+        this.shipping = shipping;
     }
 
     public String getCustomer() {

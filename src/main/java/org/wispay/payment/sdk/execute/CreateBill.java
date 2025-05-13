@@ -3,6 +3,7 @@ package org.wispay.payment.sdk.execute;
 import org.wispay.payment.sdk.mservice.common.enums.Language;
 import org.wispay.payment.sdk.mservice.config.Environment;
 import org.wispay.payment.sdk.mservice.model.bill.BillParams;
+import org.wispay.payment.sdk.mservice.model.bill.extra.PaymentUrlConfig;
 import org.wispay.payment.sdk.mservice.model.request.PurchaseRequest;
 import org.wispay.payment.sdk.mservice.model.response.PurchaseResponse;
 import org.wispay.payment.sdk.mservice.model.response.wispay.WisPayResponse;
@@ -56,6 +57,7 @@ public class CreateBill {
         List<String> itemList = new ArrayList<>();
         itemList.add(item1);
         itemList.add(item2);
+
         PurchaseRequest purchaseRequest = new PurchaseRequest();
         purchaseRequest.setRequestId(requestId);
         //purchaseRequest.setShipping(shipping);
@@ -71,9 +73,12 @@ public class CreateBill {
 
         BillParams billParams = new BillParams();
 
-        //Optional for direct payment
+        //Configure for custom payment url - OPTIONAL
+        PaymentUrlConfig paymentUrlConfig = new PaymentUrlConfig();
         String[] pspCodes = {"acb", "zalopay"};
-        billParams.setPspCodes(pspCodes);
+        paymentUrlConfig.setPspCodes(pspCodes);
+        paymentUrlConfig.setDirect(false);
+        paymentUrlConfig.setCancelable(false);
 
         billParams.setDescription("Creating Bill - Test");
         billParams.setAmount(amount);
@@ -81,7 +86,7 @@ public class CreateBill {
         billParams.setCurrency("VND");
         billParams.setExpiryAt(System.currentTimeMillis() + 900000); // + 15 min
         billParams.setExtraData(new HashMap<>());
-        billParams.setCancelable(false);
+        billParams.setPaymentUrlConfig(paymentUrlConfig);
 
         //Bill
         purchaseRequest.setBill(billParams);

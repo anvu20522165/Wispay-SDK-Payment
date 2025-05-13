@@ -4,6 +4,7 @@ import org.wispay.payment.sdk.mservice.common.annotation.NotNull;
 import org.wispay.payment.sdk.mservice.model.Attribute;
 import org.wispay.payment.sdk.mservice.model.bill.extra.BillItem;
 import org.wispay.payment.sdk.mservice.model.bill.extra.Customer;
+import org.wispay.payment.sdk.mservice.model.bill.extra.PaymentUrlConfig;
 import org.wispay.payment.sdk.mservice.model.bill.extra.Shipping;
 
 import java.util.List;
@@ -41,13 +42,10 @@ public class BillParams {
 
     private String callbackURL;
 
+    private PaymentUrlConfig paymentUrlConfig;
+
     @NotNull
     private String postbackURL;
-
-    private String[] pspCodes;
-
-    private Boolean isCancelable;
-
 
     public BillParams() {
         super();
@@ -67,14 +65,6 @@ public class BillParams {
 
     public void setBillId(String billId) {
         this.billId = billId;
-    }
-
-    public String[] getPspCodes() {
-        return pspCodes;
-    }
-
-    public void setPspCodes(String[] pspCodes) {
-        this.pspCodes = pspCodes;
     }
 
     public String getCallbackURL() {
@@ -173,11 +163,14 @@ public class BillParams {
         this.expiryAt = expiryAt;
     }
 
-    public Boolean getCancelable() {
-        return isCancelable;
+    public void setPaymentUrlConfig(PaymentUrlConfig paymentUrlConfig) {
+        this.paymentUrlConfig = paymentUrlConfig;
     }
 
-    public void setCancelable(Boolean cancelable) {
-        isCancelable = cancelable;
+    public PaymentUrlConfig getPaymentUrlConfig() {
+        if (this.paymentUrlConfig == null) {
+            this.paymentUrlConfig = new PaymentUrlConfig();
+        }
+        return this.paymentUrlConfig;
     }
 }
